@@ -45,7 +45,7 @@
 
 
 -----------------------------------------------------------------------------------------------------------------
-# 5 steps to get started
+# 6 steps to get started
 [Create a Google Cloud project](https://developers.google.com/workspace/guides/create-project) for your Google Workspace app, extension, or integration.
 
 [Enable the APIs](https://developers.google.com/workspace/guides/enable-apis) you want to use in your Google Cloud project.
@@ -56,9 +56,5 @@
 
 [Create access credentials](https://developers.google.com/workspace/guides/create-credentials) to authenticate your app's end users or service accounts.
 
-
-Details:
-This app has two files : app.js and credentials.js.
-After successfully completion of Google Cloud Setup, we save our credentials in credetials.js file for enabling authetication and Gmail API integration.
-The logical part is writtern in app.js.
+Clone the repo and run : node app.js
 
