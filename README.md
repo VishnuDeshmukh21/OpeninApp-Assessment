@@ -56,5 +56,5 @@
 
 [Create access credentials](https://developers.google.com/workspace/guides/create-credentials) to authenticate your app's end users or service accounts.
 
-Clone the repo and run : node app.js
+Clone the repo , update credentials and run : node app.js
 
