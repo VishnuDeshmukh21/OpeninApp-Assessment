@@ -1,4 +1,3 @@
-PORT=8000
 CLIENT_ID="528283222028-1tniusal4brf60g2kcjl746g2aearpgj.apps.googleusercontent.com"
 CLIENT_SECRET="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"
 REDIRECT_URI="https://developers.google.com/oauthplayground"
