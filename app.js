@@ -1,7 +1,7 @@
-
+  // Import necessary dependencies.
   const { google } = require("googleapis");
 
-
+  // Load credentials securely from a separate file.
   const {
     CLIENT_ID,
     CLIENT_SECRET,
@@ -9,7 +9,7 @@
     REFRESH_TOKEN,
   } = require("./credentials");
   
-
+  // Create an OAuth2 client instance with the provided credentials.
   const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
     CLIENT_SECRET,
@@ -17,7 +17,7 @@
   );
   oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
   
-  
+  // Set to track users who have already received replies.
   const repliedUsers = new Set();
 
 // 1. Checks for new emails in a given Gmail ID
