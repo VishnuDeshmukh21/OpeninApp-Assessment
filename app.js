@@ -169,4 +169,4 @@ function getRandomInterval(min, max) {
 }
 
 // Set up an interval to periodically check emails and send replies.
-setInterval(checkEmailsAndSendReplies, getRandomInterval(10, 20) * 1000);
+setInterval(checkEmailsAndSendReplies, getRandomInterval(45, 120) * 1000);
