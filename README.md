@@ -22,7 +22,6 @@
         * Managing labels (`users.labels.create`, `users.labels.list`, `users.messages.modify`)
         * Accessing email details (`users.messages.get`)
         * Accessing thread information (`users.threads.get`)
-* **node-fetch (v3.2.7):** This dependency might be used for fetching credentials from a separate file or API endpoint, though not explicitly imported in the provided code.
 
 **Key Technologies:**
 
@@ -44,12 +43,6 @@
 * **Rate Limits:** The Gmail API has usage quotas and rate limits. The random intervals between checks help ensure the application operates within these limits.
 * **Node.js:** This code is designed to run within the Node.js runtime environment, providing the necessary platform for executing the JavaScript code and interacting with the Gmail API.
 
-**Further Notes:**
-
-* The provided code might have additional dependencies not explicitly mentioned.
-* This spec focuses on the core libraries and technologies used based on the provided code snippet.
-
-I hope this detailed spec provides a comprehensive understanding of the libraries and technologies involved in this application. Please let me know if you have any further questions!
 
 -----------------------------------------------------------------------------------------------------------------
 # 5 steps to get started
