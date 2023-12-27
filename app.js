@@ -1,7 +1,5 @@
-  // Import necessary dependencies.
   const { google } = require("googleapis");
 
-  // Load credentials securely from a separate file.
   const {
     CLIENT_ID,
     CLIENT_SECRET,
@@ -9,7 +7,6 @@
     REFRESH_TOKEN,
   } = require("./credentials");
   
-  // Create an OAuth2 client instance with the provided credentials.
   const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
     CLIENT_SECRET,
@@ -17,10 +14,8 @@
   );
   oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
   
-  // Set to track users who have already received replies.
   const repliedUsers = new Set();
 
-// 1. Checks for new emails in a given Gmail ID
   async function checkEmailsAndSendReplies() {
     try {
       const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
@@ -32,10 +27,9 @@
       });
       const messages = res.data.messages;
       const today = new Date();
-      today.setHours(0, 0, 0, 0); // Set the time to midnight (beginning of the day)
+      today.setHours(0, 0, 0, 0); 
       
       if (messages && messages.length > 0) {
-        // Fetch the complete message details.
         for (const message of messages) {
           const email = await gmail.users.messages.get({
             userId: "me",
@@ -67,31 +61,24 @@
             (header) => header.name === "Subject"
           );
 
-          //who sends email extracted
           const From = from.value;
-          //who gets email extracted
           const toEmail = toHeader.value;
-          //subject of unread email
           const subject = Subject.value;
           console.log("email come From", From);
           console.log("to Email", toEmail);
-          //check if the user already been replied to
           if (repliedUsers.has(From)) {
             console.log("Already replied to : ", From);
             continue;
           }
-          // 2.Send replies to Emails that have no prior replies
-          // Check if the email has any replies.
+     
           const thread = await gmail.users.threads.get({
             userId: "me",
             id: message.threadId,
           });
   
-          //isolated the email into threads
           const replies = thread.data.messages.slice(1);
   
           if (replies.length === 0) {
-            // Reply to the email.
             await gmail.users.messages.send({
               userId: "me",
               requestBody: {
@@ -99,7 +86,6 @@
               },
             });
   
-            // Add a label to the email.
             const labelName = "onVacation";
             await gmail.users.messages.modify({
               userId: "me",
@@ -110,7 +96,6 @@
             });
   
             console.log("Sent reply to email:", From);
-            //Add the user to replied users set
             repliedUsers.add(From);
           }
         }
@@ -120,7 +105,6 @@
     }
   }
   
-  //this function is basically converte string to base64EncodedEmail format
   async function createReplyRaw(from, to, subject) {
     const emailContent = `From: ${from}\nTo: ${to}\nSubject: ${subject}\n\nThank you for your message. i am  unavailable right now, but will respond as soon as possible...`;
     const base64EncodedEmail = Buffer.from(emailContent)
@@ -131,7 +115,6 @@
     return base64EncodedEmail;
   }
   
-  //3.Adds  label to the email and move the email to the label
   async function createLabelIfNeeded(labelName) {
     const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
     // Check if the label already exists.
@@ -143,7 +126,6 @@
       return existingLabel.id;
     }
   
-    // Create the label if it doesn't exist.
     const newLabel = await gmail.users.labels.create({
       userId: "me",
       requestBody: {
@@ -156,11 +138,9 @@
     return newLabel.data.id;
   }
   
-  //Repeats this sequence of steps 1-3 in random intervals of 45 to 120 seconds*/
   function getRandomInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
   
-  //Setting Interval and calling main function in every interval
   setInterval(checkEmailsAndSendReplies, getRandomInterval(40, 120) * 1000);
   
