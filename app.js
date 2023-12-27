@@ -130,7 +130,7 @@
     return base64EncodedEmail;
   }
   
-  // 3.add a Label to the email and move the email to the label
+  //Adds  label to the email and move the email to the label
   async function createLabelIfNeeded(labelName) {
     const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
     // Check if the label already exists.
@@ -155,7 +155,7 @@
     return newLabel.data.id;
   }
   
-  /*4.repeat this sequence of steps 1-3 in random intervals of 45 to 120 seconds*/
+  //Repeats this sequence of steps 1-3 in random intervals of 45 to 120 seconds*/
   function getRandomInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
