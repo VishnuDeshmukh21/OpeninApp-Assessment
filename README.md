@@ -6,6 +6,51 @@
 2. The app sends reply to Emails that have no prior replies
 3. The app adds a Label to the email and move the email to the label
 4. The app repeats this sequence of steps 1-3 in random intervals of 45 to 120 seconds
+
+## Detailed Spec of Libraries and Technologies Used
+
+**Programming Language:**
+
+* **JavaScript:** The primary language used for scripting and interacting with Gmail APIs.
+
+**Libraries:**
+
+* **googleapis (v54.0.0):** Provides a Node.js client library for accessing Google APIs, including the Gmail API.
+    * Used for:
+        * Fetching unread messages (`users.messages.list`)
+        * Sending replies (`users.messages.send`)
+        * Managing labels (`users.labels.create`, `users.labels.list`, `users.messages.modify`)
+        * Accessing email details (`users.messages.get`)
+        * Accessing thread information (`users.threads.get`)
+* **node-fetch (v3.2.7):** This dependency might be used for fetching credentials from a separate file or API endpoint, though not explicitly imported in the provided code.
+
+**Key Technologies:**
+
+* **OAuth 2.0:** An authorization framework used for secure access to user data with Gmail.
+    * Employed to authenticate the application with Gmail and obtain necessary permissions (`new google.auth.OAuth2`).
+* **Gmail API v1:** A RESTful API that allows programmatic access to Gmail data and actions.
+    * Used for:
+        * Listing unread messages with specific query (`q: "is:unread"`)
+        * Getting complete message details (`payload.headers`)
+        * Sending email replies with base64-encoded content
+        * Creating and managing labels for categorization
+* **Base64 Encoding:** Used to encode the email content into a format suitable for transmission via the Gmail API (`Buffer.from(emailContent) ... `).
+* **Intervals:** `setInterval` is used to repeatedly check for new emails at random intervals between 45 and 120 seconds, aiding in managing API rate limits.
+* **Error Handling:** Basic error handling with `try-catch` blocks to log errors during API interactions.
+
+**Additional Considerations:**
+
+* **Credentials:** Stored in a separate `credentials.js` file to protect sensitive information like OAuth client ID, client secret, redirect URI, and refresh token.
+* **Rate Limits:** The Gmail API has usage quotas and rate limits. The random intervals between checks help ensure the application operates within these limits.
+* **Node.js:** This code is designed to run within the Node.js runtime environment, providing the necessary platform for executing the JavaScript code and interacting with the Gmail API.
+
+**Further Notes:**
+
+* The provided code might have additional dependencies not explicitly mentioned.
+* This spec focuses on the core libraries and technologies used based on the provided code snippet.
+
+I hope this detailed spec provides a comprehensive understanding of the libraries and technologies involved in this application. Please let me know if you have any further questions!
+
 -----------------------------------------------------------------------------------------------------------------
 # 5 steps to get started
 [Create a Google Cloud project](https://developers.google.com/workspace/guides/create-project) for your Google Workspace app, extension, or integration.
