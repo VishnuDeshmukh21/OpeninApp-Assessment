@@ -44,6 +44,14 @@
 * **Node.js:** This code is designed to run within the Node.js runtime environment, providing the necessary platform for executing the JavaScript code and interacting with the Gmail API.
 
 
+Areas where your code can be improved:
+1. Credential Storage: Move credentials to environment variables: Achieved by using .env and dotenv.
+2. OAuth 2.0 Best Practices: Implement refresh token rotation: Enhance security by periodically obtaining new refresh tokens.
+3. Modularization: Break down large functions: Improve readability and maintainability.
+4. Filtering Options: Filter emails based on criteria: Target responses more effectively.
+5. Whenever we add a new feature, we'll have to make sure it has strong error handling built in. This means the code will be able to catch problems and explain them clearly.
+
+
 -----------------------------------------------------------------------------------------------------------------
 # 6 steps to get started
 [Create a Google Cloud project](https://developers.google.com/workspace/guides/create-project) for your Google Workspace app, extension, or integration.
