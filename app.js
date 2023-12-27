@@ -19,7 +19,8 @@
   
   
   const repliedUsers = new Set();
-  
+
+// 1. Checks for new emails in a given Gmail ID
   async function checkEmailsAndSendReplies() {
     try {
       const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
@@ -79,7 +80,7 @@
             console.log("Already replied to : ", From);
             continue;
           }
-          // 2.send replies to Emails that have no prior replies
+          // 2.Send replies to Emails that have no prior replies
           // Check if the email has any replies.
           const thread = await gmail.users.threads.get({
             userId: "me",
@@ -130,7 +131,7 @@
     return base64EncodedEmail;
   }
   
-  //Adds  label to the email and move the email to the label
+  //3.Adds  label to the email and move the email to the label
   async function createLabelIfNeeded(labelName) {
     const gmail = google.gmail({ version: "v1", auth: oAuth2Client });
     // Check if the label already exists.
@@ -161,5 +162,5 @@
   }
   
   //Setting Interval and calling main function in every interval
-  setInterval(checkEmailsAndSendReplies, getRandomInterval(10, 50) * 1000);
+  setInterval(checkEmailsAndSendReplies, getRandomInterval(40, 120) * 1000);
   
